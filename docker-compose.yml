@@ -22,7 +22,7 @@ services:
     volumes:
       - .:/var/www
     env_file:
-      - .env.docker # Usamos el archivo adecuado para conexión MySQL
+      - .env
     networks:
       - laravel
     depends_on:

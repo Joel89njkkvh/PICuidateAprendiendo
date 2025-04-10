@@ -1,8 +1,7 @@
 # dockerfile
 
-
 # Imagen base de PHP con extensiones necesarias
-FROM php:8.2-fpm
+FROM php:8.1-fpm
 
 # Instalar dependencias
 RUN apt-get update && apt-get install -y \
@@ -15,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     libonig-dev \
     libxml2-dev \
+    sqlite3 \
+    libsqlite3-dev \
     && docker-php-ext-configure gd \
     && docker-php-ext-install gd mbstring pdo pdo_mysql pdo_sqlite bcmath opcache
 
