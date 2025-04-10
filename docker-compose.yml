@@ -11,8 +11,9 @@ services:
     command: tail -f /dev/null
     networks:
       - laravel
+
   applaravel:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     container_name: applaravel
@@ -20,8 +21,12 @@ services:
     working_dir: /var/www
     volumes:
       - .:/var/www
+    env_file:
+      - .env.docker # Usamos el archivo adecuado para conexión MySQL
     networks:
       - laravel
+    depends_on:
+      - db
 
   db:
     image: mysql:8.0
@@ -32,6 +37,8 @@ services:
       MYSQL_DATABASE: laravel
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
